@@ -1,0 +1,76 @@
+.input{
+  border: 3px solid #ae7000;
+}
+
+.show{
+  opacity: 1;
+}
+
+.hide{
+  opacity: 0;
+}
+
+.show-advanced{
+  animation: show-item 2s ease-in forwards;
+}
+
+.hide-advanced{
+  animation: hide-item 2s ease-in forwards;
+}
+
+@keyframes show-item{
+  0%{
+    opacity: 0;
+    color: yellow;
+  }
+  20%{
+    opacity: .5;
+    color:red
+  }
+  100%{
+    opacity: 1;
+    color: green;
+  }
+}
+
+@keyframes hide-item{
+  0%{
+    opacity: 1;
+    color: yellow;
+  }
+  20%{
+    opacity: .5;
+    color:red
+  }
+  100%{
+    opacity: 0;
+    color: green;
+  }
+}
+
+/* react-transition-group */
+.ani-text-enter{
+  opacity: 0;
+}
+
+.ani-text-enter-active{
+  opacity: 1;
+  transition: opacity 2000ms;
+}
+
+.ani-text-enter-done{
+  opacity: 1;
+}
+
+.ani-text-exit {
+  opacity: 1;
+}
+
+.ani-text-exit-active {
+  opacity: 0;
+  transition: opacity 2000ms;
+}
+
+.ani-text-exit-done {
+  opacity: 0;
+}
