@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head'
 import { Row, Col, List, Breadcrumb } from 'antd'
 import Header from '../components/Header'
@@ -7,17 +7,17 @@ import Ad from '../components/Ad'
 import Footer from '../components/Footer'
 import { CalendarOutlined, FolderOutlined, UserOutlined } from '@ant-design/icons';
 
+import axios from 'axios'
+import servicePath from '../config/apiUrl'
+import Link from 'next/link'
 
-function MyList() {
 
-  const [mylist, setMylist] = useState(
-    [
-      {title:"first", context:"this is first context"},
-      {title:"second", context:"this is second context"},
-      {title:"third", context:"this is third context"},
-      {title:"fourth", context:"this is fourth context"},
-    ]
-  )
+function MyList(list) {
+
+  const [mylist, setMylist] = useState(list.data)
+  useEffect(() => {
+    setMylist(list.data)
+  })
 
   return (
     <div>
@@ -39,13 +39,17 @@ function MyList() {
             dataSource= {mylist}
             renderItem={item=>(
               <List.Item>
-                <div className="list-title">{item.title}</div>
-                <div className="list-icon">
-                  <span><CalendarOutlined /> 2019-07-08</span>
-                  <span><FolderOutlined /> Video</span>
-                  <span><UserOutlined /> 200</span>
+                <div className="list-title">
+                  <Link href={{pathname:'/detailed', query:{id:item.id}}}>
+                    <a>{item.title}</a>
+                  </Link>
                 </div>
-                <div className="list-context">{item.context}</div>
+                <div className="list-icon">
+                  <span><CalendarOutlined /> {item.publishTime}</span>
+                  <span><FolderOutlined /> {item.typeName}</span>
+                  <span><UserOutlined /> {item.view_count} clicks</span>
+                </div>
+                <div className="list-context">{item.introduce}</div>
               </List.Item>
             )}
           />
@@ -58,6 +62,16 @@ function MyList() {
       <Footer />
     </div>
   )
+}
+
+MyList.getInitialProps = async (context) => {
+  let id = context.query.id
+  const promise = new Promise((resolve) => {
+    axios(servicePath.getListById+id).then(
+      (res) => resolve(res.data)
+    )
+  })
+  return await promise
 }
 
 export default MyList

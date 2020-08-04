@@ -1,6 +1,7 @@
 .header {
   background-color: #fff;
   padding: .4rem;
+  padding-left: 1rem;
   overflow: hidden;
   height: 3.2rem;
   border-bottom: 1px solid #ccc;
@@ -10,6 +11,7 @@
   color: #1e90ff;
   font-size: 1.4rem;
   text-align: left;
+  margin-right: .2rem;
 }
 
 .header-text {
