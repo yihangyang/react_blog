@@ -44,14 +44,13 @@ module.exports = appInfo => {
   };
 
   config.security = {
-    scrf: {
-      enable: false
-    },
+    csrf: { enable: false },
     domainWhiteList: ['*']
   };
 
   config.cors = {
-    origin: '*',
+    origin: 'http://localhost:3000',
+    credentials: true, // allow cookie to CROS
     allowMethods: 'GET, HEAD, PUT, POST, UPDATE, DELETE, PATCH, OPTIONS'
   }
 
